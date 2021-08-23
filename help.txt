@@ -5,7 +5,7 @@ every branch is a seperate tutorial(Lession)
 
 every branch notes we can find in this file
 
-Note: all the commands are with respect to project root folder
+Note: all the commands are with respect to project root folder ( execute all the commands in project folder )
 
 
 
@@ -334,3 +334,66 @@ $ dig proxy
 
 ------
  these are useful for micro services interactions & to connect database
+
+#############################################################################################################
+########################################## Lession - 4 ######################################################
+#############################################################################################################
+
+
+###########################################
+
+ contents:-
+ - network & network aliases
+    container apps interaction over the docker network
+
+ - debugging network with netshoot   
+
+#############################################
+
+
+ 
+
+------------------- basic docker-compose commands -------------
+
+$ docker-compose up         # to start all the services
+
+$ docker-compose stop
+
+$ docker-compose restart
+
+$ docker-compose up -d      # -d detached mode   # to start all the services
+
+$ docker-compose logs -f    # -f follows ...like continus logs ( attched )
+
+$ docker-compose logs -f service_name
+
+$ docker-compose down       # to stop all the services
+
+
+-----------------------------------------------------------
+
+1) when we run 
+     $ docker-compose up 
+
+        *) it'll create containers with the service name
+        *) it'll create the mentioned named volumes (or) mount the bind volumes
+        *) it'll create the network 
+                                if specified with specified name
+                                else app_folder_name_default
+
+        *) if we run without -d flag, 
+                    - all the logs we can see,
+                    - ctrl + c will stop all the services
+
+        *) f we run with -d flag,
+                    - all the services will be started in detached mode
+
+
+
+2) when we run
+    $ docker-compose down
+
+        *) it'll stop & delete all the container & networks
+        *) by default it won't delete volumes
+                    to delete volumes
+                        $ docker-compose down --volumes
