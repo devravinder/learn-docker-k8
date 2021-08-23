@@ -5,6 +5,10 @@ every branch is a seperate tutorial(Lession)
 
 every branch notes we can find in this file
 
+Note: all the commands are with respect to project root folder
+
+
+
 
 
 #############################################################################################################
