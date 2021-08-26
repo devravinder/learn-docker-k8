@@ -343,10 +343,7 @@ $ dig proxy
 ###########################################
 
  contents:-
- - network & network aliases
-    container apps interaction over the docker network
-
- - debugging network with netshoot   
+ - docker-compose basic configuration
 
 #############################################
 
