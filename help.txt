@@ -169,6 +169,13 @@ Note: all the commands are with respect to project root folder ( execute all the
 
 
 
+   [
+      -p (or) -P means publish ( not port ), we can use '--publish' insteadof '-p' flag
+      - publish port
+
+   ]
+
+
 --------------------------------- sharing / pushing to repo / hub ----------
 
    - first create an account in docker hub, then login from local systme terminal
