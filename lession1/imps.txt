@@ -1,0 +1,18 @@
+
+
+=============== debugging / logs =============
+
+1) $ docker inspect container_id_or_name  # gives information about the container
+
+2) $ docker attach --sig-proxy=false container_id
+    -> then press ctrl+c to exit ( with stopping the container )
+    -> if we don't pass --sig-proxy=false, and if we press ctrl+c, then it'll stop the container
+
+    [
+     docker run --sig-proxy=false -p 8080:8080 -v host_dir:/app/data_container --name api-server api-server-img
+    ]
+
+3)  $ docker exec -it todo_server /bin/sh      # interactive termainal
+
+4) $ docker logs -f container_id_or_name
+

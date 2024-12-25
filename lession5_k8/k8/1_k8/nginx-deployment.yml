@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:           # this specification for the deployment
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2 # tells deployment to run the no of pods matching the template
+  template: #(this is blueprint for the pod) create pods using pod definition in this template
+    metadata:
+      labels:
+        app: nginx
+    spec:         # this specification for the pod
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        ports:
+         - containerPort: 8080

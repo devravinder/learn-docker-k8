@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  server:
+    image: node:12-alpine # we can use cuctom images also
+    ports:
+      - 8080:8080
+    working_dir: /app
+    volumes:
+      - ./todo_server:/app    # for continuos development
+    environment:
+      NODE_ENV: dev
+      DB_TYPE: sqlite
+    command: sh -c "npm install && npm run dev"
+
+
+  proxy:
+    image: node:12-alpine
+    ports:
+      - 7070:7070
+    working_dir: /app
+    volumes:
+      - ./todo_proxy:/app
+    command: sh -c "npm install && npm run dev"
+
+volumes:
+  todo_app_volume:
+
+# stop vs down https://stackoverflow.com/questions/46428420/docker-compose-up-down-stop-start-difference
