@@ -1,0 +1,61 @@
+
+pull the mongo image
+---------------------
+$ docker pull mongo
+
+
+
+create docker container:-
+---------------------------
+$ docker run -d -p 27018:27017 --name mongoContainer -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin-mongo  mongo
+
+
+enter into the docker container
+----------------------------------
+$ docker exec -it mongoContainer /bin/sh
+
+
+einter into the mongo cli
+-------------------------------
+$ mongosh -u admin -p admin-mongo
+
+
+crate a db ( switch to db )
+----------------------
+$ use devops          
+
+create a user (enter password when asked )
+---------
+$ db.createUser(
+  {
+    user: "devops",
+    pwd: passwordPrompt(),  // or cleartext password
+    roles: [
+       { role: "readWrite", db: "devops" }
+    ]
+  }
+)
+
+
+
+----------- 
+usefull queries
+ $ show dbs
+ $ db.getUsers()
+ $ use zudioDB
+ $ db.dropDatabase()    # to delete all the data in a db
+
+ $ db.user.deleteMany({});
+
+
+==========================================
+
+db.createUser(
+  {
+    user: "alumni",
+    pwd: passwordPrompt(),  // or cleartext password
+    roles: [
+       { role: "readWrite", db: "alumni" }
+    ]
+  }
+)

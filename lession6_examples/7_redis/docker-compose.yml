@@ -1,0 +1,17 @@
+services:
+  redis:
+    image: redis:7.0-alpine
+    container_name: redis-local
+    privileged: true    # run the container with privileged mode ( on host system )
+    volumes:
+#      - ./redis-data:/data # Persistent storage
+      - ./redis.conf:/usr/local/etc/redis/redis.conf # Custom Redis config
+    environment:
+#      - REDIS_REPLICATION_MODE=master
+      - REDIS_PASSWORD=redis
+      - REDIS_USERNAME=redis
+      - REDIS_DISABLE_DEFAULT_USER="true"
+
+    ports:
+      - "6379:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass "$REDIS_PASSWORD" --user "$REDIS_USERNAME" on ">${REDIS_PASSWORD}" ~* &>* +@all

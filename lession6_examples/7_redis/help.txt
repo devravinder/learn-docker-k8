@@ -1,0 +1,50 @@
+1. to run redis container without warnings
+    on host machnine in '/etc/sysctl.conf' set 
+        vm.overcommit_memory=1
+
+    and run with 'privileged' permissions
+
+    i.e we are allowing the container to take as much as memoery required ( regardless of memoery availability ).
+        this may lead out-of-memory (OOM) errors if processes attempt to use more memory than is physically available.
+        - be carefull
+
+
+     
+2. inspecting
+   
+   $ docker exec -it redis-loacl /bin/sh
+
+   $ redis-cli             # enter into redis cli
+
+   $ AUTH redis redis      # AUTH username password
+
+
+3. to get the ip address
+   $ docker inspect redis-local | grep IPAddress
+
+   use this ip address to connect from redisinsight
+
+
+4. connection string
+   $ redis://redis:redis@172.17.0.2:6379
+   $ redis://user:password@host:port
+
+
+5. What is 
+   user USER_NAME on >USER_PASSWORD ~* &* +@all
+
+      Each part means:
+
+      on - enables the user account
+      >USER_PASSWORD - sets the password to "USER_PASSWORD"
+      ~* - allows access to all key patterns (~ is for key patterns, * means all keys)
+      &* - allows access to all pub/sub channels (& is for channels, * means all channels)
+      +@all - grants all available Redis commands (+@ means add command category, all means all commands)
+
+
+      This is essentially giving superuser/admin privileges to the "redis" user.
+      If you want more restricted permissions, you could replace +@all with specific command categories like:
+
+      +@read - only read commands
+      +@write - only write commands
+      +@admin - only admin commands
