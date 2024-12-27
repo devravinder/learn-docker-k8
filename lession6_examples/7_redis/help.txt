@@ -1,3 +1,8 @@
+0. redis server vs redis serach vs redis stack
+   - all are not same 
+   - basic redis server, medium redis serach, advance redis stack ( features )
+   - redis stack provides all features including TimeSeries & Graphs
+
 1. to run redis container without warnings
     on host machnine in '/etc/sysctl.conf' set 
         vm.overcommit_memory=1

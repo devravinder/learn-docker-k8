@@ -26,4 +26,8 @@ docker run --privileged -d -p 6379:6379 --name redis-local redis-local
 
 
 
+#   connection string
+#   $ redis://redis:redis@1localhost:6379
+#   $ redis://redis:redis@172.17.0.2:6379
+#   $ redis://user:password@host:port
 

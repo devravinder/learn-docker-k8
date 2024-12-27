@@ -1,13 +1,19 @@
-FROM redis:7.0-alpine
+FROM redis/redis-stack-server:latest
 
 ENV REDIS_USERNAME=redis
 ENV REDIS_PASSWORD=redis
-ENV REDIS_DISABLE_DEFAULT_USER="true"
 
 # for redis configuration
-COPY redis.conf /usr/local/etc/redis/redis.conf
+COPY redis.conf /etc/redis/redis.conf
+COPY users.acl /etc/redis/users.acl
+
+
+
+# add dynamic configuration
+RUN echo "user ${REDIS_USERNAME} on >${REDIS_PASSWORD} ~* &* +@all" > /etc/redis/users.acl
+RUN echo "requirepass ${REDIS_PASSWORD}" >> /etc/redis/redis.conf
+
 
 EXPOSE 6379
 
-CMD redis-server /usr/local/etc/redis/redis.conf --requirepass "$REDIS_PASSWORD" --user "$REDIS_USERNAME" on ">${REDIS_PASSWORD}" ~* &>* +@all
-
+CMD ["redis-stack-server", "/etc/redis/redis.conf"]
