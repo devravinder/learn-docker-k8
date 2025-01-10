@@ -1,0 +1,33 @@
+name: 'insta-cred'
+services:
+  loan-hub-redis:
+    image: redis/redis-stack-server:6.2.6-v17
+    container_name: loan-hub-redis
+    ports:
+      - "16379:6379"
+    environment:
+      REDIS_USERNAME: "redis"
+      REDIS_PASSWORD: "redis"
+    volumes:
+      - ./redis:/redis
+    command: [ "sh", "/redis/start.sh" ]
+
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+
+  loan-hub-redis-ui:
+    profiles:
+      - ui
+    image: redis/redisinsight:latest
+    container_name: loan-hub-redis-ui
+    ports:
+      - "15540:5540"
+    healthcheck:
+      test: [ "CMD", "echo", "Hello" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
