@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-app
+spec:
+  replicas: 1
+  # replicas: 1
+  selector:
+    matchLabels:
+      app: basic-app
+  template:
+    metadata:
+      labels:
+        app: basic-app
+    spec:
+      containers:
+      - name: basic-app
+        image: basic-app
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
