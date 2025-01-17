@@ -7,8 +7,8 @@ spec:
     app: basic-app
   ports:
   - protocol: TCP
-    port: 3000
-    targetPort: 3000
-    # nodePort: 30001 # You can specify any available port here.  # if we are using type: NodePort
+    port: 3000        # ClusterIP service port
+    targetPort: 3000  # Pod containerPort
+    # nodePort: 30001 # External NodePort  # if we are using type: NodePort, uncomment this
   type: LoadBalancer
   # type: NodePort

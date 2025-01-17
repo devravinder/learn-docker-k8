@@ -34,7 +34,7 @@
 
 
 - Set up Kubernetes cluster:-
-  - kind create cluster --name local-cluster
+  - `kind create cluster --name local-cluster`
 
   - load the existing image into the cluster ( if image exists in local system ) (optional)
      - `kind load docker-image basic-app --name local-cluster`
@@ -53,14 +53,14 @@
       - `kubectl create service basic-app --type=LoadBalancer --port 3000`
 
   - Note:- 
-     - don't use '_' for the name in Yaml files ( i.e basic-app )...will give error
+     - don't use '_' for the name in Yaml files ( i.e basic_app )...it will give error
      - use '-' for the names ( i.e basic-app )
 
-     - also we can combine both deployment & service manifests to signle Yaml file
+     - also we can combine both deployment & service manifests to signle Yaml file ( not recommended )
 
 
 - Deploy to the Kind cluster:-
-  - `kubectl apply -f deployment.yaml`  or `kubectl apply -f deployment.yaml`
+  - `kubectl apply -f deployment.yaml`
   - `kubectl apply -f service.yaml`
 
 - Check the status:-
@@ -70,7 +70,7 @@
 
 
 - Acess the app:-
-  - `kubectl port-forward svc/basic-app-service 3000:3000`  # if we are uding load balancer ( type: LoadBalancer )
+  - `kubectl port-forward svc/basic-app-service 3000:3000`  # if we are using load balancer ( type: LoadBalancer )
   - visit `http://localhost:3000/`
 
   - Note:- 
@@ -105,3 +105,57 @@
   - or
   - `kubectl delete all --all` # pods, services, deployments
   - `kind delete cluster --name local-cluster`  # delete the cluster using kind
+
+
+
+
+
+## LoadBalancer vs NodePort
+  - LoadBalancer and NodePort are two types of Kubernetes services that expose your application to external traffic.
+
+NodePort:- 
+ - A NodePort service exposes the application on a static port (the NodePort) on all Kubernetes worker nodes' IPs. 
+ - Traffic can be accessed via <NodeIP>:<NodePort>.
+
+ - How It Works:-
+
+   - Kubernetes allocates a port in the range 30000–32767 (default range) on each node.
+   - External traffic sent to this port on any node is forwarded to the appropriate Pod.
+   - Use Case:
+
+      - Useful for local testing or environments where external load balancing isn't required.
+      - Traffic must go through the node's IP and the allocated NodePort.
+
+      - Pros:
+
+        - Simple to configure.
+        - No dependency on external infrastructure.
+
+      - Cons:
+
+        - Not suitable for production-grade deployments in most cases.
+        - The application becomes exposed directly on the node, which can be less secure.
+        - Requires manual management if multiple services need distinct NodePorts.
+
+
+LoadBalancer:-
+  - A LoadBalancer service provisions an external load balancer (if supported by the infrastructure provider) to expose the application to the internet.
+
+  - How It Works:
+
+    - A cloud provider's load balancer (e.g., AWS ELB, GCP Load Balancer, Azure Load Balancer) is automatically created and routes traffic to the appropriate NodePort services.
+    - The load balancer gets a public IP, making the service accessible via <LoadBalancerIP>:<ServicePort>.
+    - Use Case:
+
+      - Ideal for production environments where external clients need to access the application.
+      - Automatically integrates with cloud provider infrastructure.
+      - Pros:
+
+        - Provides a production-grade, cloud-integrated solution.
+        - Automatically handles external traffic routing and load balancing.
+      - Cons:
+
+        - Requires a cloud provider that supports external load balancers.
+        - Can incur additional costs for the load balancer infrastructure.
+
+

@@ -7,10 +7,10 @@ spec:
   # replicas: 1
   selector:
     matchLabels:
-      app: basic-app
+      app: basic-app # this used by the selector ( here Deployment )
   template:
     metadata:
-      labels:
+      labels: # this lables is for the below specified resources ( here Pod )
         app: basic-app
     spec:
       containers:

@@ -3,7 +3,8 @@
 Container orchestration:-
   - is the process of automating the deployment, management, scaling, and networking of containers throughout their lifecycle
 
-Kubernetes:- is an open-source container orchestraton tool / software
+Kubernetes:-
+   - is an open-source container orchestraton tool / software
 
 
 ## Core Components:-
@@ -146,7 +147,7 @@ Job:-
       - to automatically retries on failure (based on configuration, util certain criteria is met).
       - to executes a specified number of times (e.g., 1 or more parallel jobs)
   - They ensure that tasks are completed reliably
-     - deal for tasks like database migrations or batch data processing
+     - ideal for tasks like database migrations or batch data processing
      - Generate reports, send bulk emails.
   
 
@@ -171,7 +172,7 @@ Ingres:-
  - It allows users to deploy applications, manage cluster resources, and perform various administrative tasks
  - we can create a resource using kubectl command line tool
       - with config file ( YAML file ) [ recommended ]
-      - without file ( firectly from cmd )
+      - without file ( directly from cmd )
 
 
  ## Storage in Kubernetes
