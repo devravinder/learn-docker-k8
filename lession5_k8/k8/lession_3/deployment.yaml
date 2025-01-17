@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-express-app
+  labels:
+    app: node-express-app
+spec:
+  replicas: 2  # Specify the number of replicas here
+  selector:
+    matchLabels:
+      app: node-express-app
+  template:
+    metadata:
+      labels:
+        app: node-express-app
+    spec:
+      containers:
+      - name: node-express-app
+        image: devravinder/node-express-app  # Use your image name here
+        ports:
+        - containerPort: 3000

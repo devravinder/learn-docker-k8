@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-express-app-service
+spec:
+  type: NodePort  # Use NodePort for local testing; can use LoadBalancer in production.
+   # You can also use LoadBalancer if your cluster supports it
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30001  # Specify a port to access the service externally.
+      # nodePort range must be between 30000 and 32767
+  selector:
+    app: node-express-app
+
+  sessionAffinity: None # ClientIP # sticky sessions
+  # by default sticky sessions is ClientIP..it means all the requets from one client will go to the same pod ( app ) 
+  # sessionAffinityConfig:
+  # clientIP:
+  #   timeoutSeconds: 3600  # 1 hour   # stick the session ( client & pod ) for 1 hour for max

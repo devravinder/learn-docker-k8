@@ -10,5 +10,6 @@ spec:
     port: 3000        # ClusterIP service port
     targetPort: 3000  # Pod containerPort
     # nodePort: 30001 # External NodePort  # if we are using type: NodePort, uncomment this
+    # nodePort range must be between 30000 and 32767
   type: LoadBalancer
   # type: NodePort

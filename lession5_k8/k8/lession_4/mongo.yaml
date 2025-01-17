@@ -1,0 +1,77 @@
+
+# Persistent Volume (PV)
+
+# The PV is provided by the administrator or cloud provider
+# in local system...we'll provide it
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain # if don't keep retain it will be deleted..once the linked pod is deleted
+  storageClassName: ""  # Match PVC storage class # in production we'll use proper storage class
+  hostPath:
+    path: /home/ravinder/Drive/work-spaces/devops/docker_k8/lession5_k8/k8/lession_4/mongo-data # create this folder if it doesn't exist # give absolute path
+---
+# Persistent Volume Claim(PVC)
+
+# The PVC will request storage from the PV
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""  # Match PV storage class
+  resources:
+    requests:
+      storage: 1Gi
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  labels:
+    app: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: devravinder/mongo
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-data
+          mountPath: /data/db
+      volumes:
+      - name: mongo-data
+        # emptyDir: {}  # ephemeral # disable persistentVolumeClaim...to use ephemeral
+        persistentVolumeClaim:
+          claimName: mongo-pvc
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  selector:
+    app: mongo
+  type: ClusterIP  # Internal access only within the cluster
