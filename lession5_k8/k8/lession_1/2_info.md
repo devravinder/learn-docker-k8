@@ -271,6 +271,7 @@ Backup and Restore:-
  - it simplifies the process of deploying and managing applications on a Kubernetes cluster. 
  - It allows you to define, install, and upgrade Kubernetes resources through reusable templates called Helm charts.
  - users can manage their applications without needing to remember complex Kubernetes commands
+ - reusable templates & version control
  
 
 ### Key Concepts:-

@@ -1,0 +1,23 @@
+apiVersion: v1
+entries:
+  simple-node-express:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-01-19T03:36:58.970275616+05:30"
+    description: A Helm chart for Kubernetes
+    digest: 5ec3a6c86261889f7642052cd315a697f07be95c85914516524f87f16032f5e5
+    home: https://github.com/devravinder/rare-helm-charts
+    keywords:
+    - nodejs
+    - express
+    maintainers:
+    - email: developer.ravinder.reddy@paravartech.com
+      name: Ravinder Reddy Kothabad
+    name: simple-node-express
+    sources:
+    - https://github.com/devravinder/rare-helm-charts
+    type: application
+    urls:
+    - simple-node-express-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-01-19T03:36:58.969957376+05:30"
