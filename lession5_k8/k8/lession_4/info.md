@@ -22,4 +22,11 @@ Port-forwarding:-
   - `kubectl port-forward svc/express-app-service 3000:3000` # for service   ( use this for load balancer )
   - `kubectl port-forward pod/<pod-name> <local-port>:<pod-port>` # for port
 
- 
+Persistent Volume Debugging:- 
+  - enter into the mongo pod
+     - `kubectl exec -it <pod-name> -- bash`
+     - `df -h /data/data`  # this gives actual path where data is stored 
+
+
+Cleanup:-
+  - `kubectl delete all --all`
