@@ -144,7 +144,7 @@ Job:-
   - one job can have multiple pods
   - it terminates the pods after the completion of the job
   - Jobs can be configured 
-      - to automatically retries on failure (based on configuration, util certain criteria is met).
+      - to automatically retries on failure (based on configuration, until certain criteria is met).
       - to executes a specified number of times (e.g., 1 or more parallel jobs)
   - They ensure that tasks are completed reliably
      - ideal for tasks like database migrations or batch data processing

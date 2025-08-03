@@ -53,7 +53,7 @@ Acess the app:-
  - we can access the appication like `http:<node-ip>:<node-port>/`
  - in our case the node is docker container...so container ip is the node ip
  - we can get node ip using
-      - gte the node name ( container name ) & inspect the node ( with docker inspect )
+      - get the node name ( container name ) & inspect the node ( with docker inspect )
          - `kubectl get nodes` # to get node name ( container name )
          - `docker inspect <NODE_NAME>` # inspect the node
          - or to get only ip address

@@ -298,7 +298,7 @@ $ docker run -dp 8080:8080 -w /app -v $(pwd):/app -e NODE_ENV=dev  --network tod
 
 ================================================================================
 ============================== Debugging ==============================
- 1) attch the debugger & expose the port
+ 1) attach the debugger & expose the port
   add "debug": "nodemon --inspect=0.0.0.0:9229 src/app.js"  in package.json
   expose port :9229
   build the image  [ $ docker build -t todo_server_img .]
