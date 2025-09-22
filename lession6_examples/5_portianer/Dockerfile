@@ -12,7 +12,7 @@ ENV AGENT_POLL_INTERVAL=60
 
 # Expose required ports
 EXPOSE 8000
-EXPOSE 9000
+EXPOSE 9443
 
 # Set volume for persistent data
 # VOLUME /data   # pass manually while running the container

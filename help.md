@@ -75,7 +75,7 @@ Note: all the commands are with respect to project root folder ( execute all the
 
     $ docker ps         # list running process  ( running container is process )
 
-    $ dokcer ps -a      # list all the process
+    $ docker ps -a      # list all the process
 
     $ docker container stop container_id_or_name   # to stop container
 
