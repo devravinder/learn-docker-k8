@@ -1,10 +1,10 @@
-name: 'insta-cred'
+name: 'redis-local'
 services:
-  loan-hub-redis:
+  redis-local:
     image: redis/redis-stack-server:6.2.6-v17
-    container_name: loan-hub-redis
+    container_name: redis-local
     ports:
-      - "16379:6379"
+      - "6379:6379" # hostPort:containerPort
     environment:
       REDIS_USERNAME: "redis"
       REDIS_PASSWORD: "redis"
@@ -19,11 +19,11 @@ services:
       retries: 5
 
 
-  loan-hub-redis-ui:
+  redis-ui:
     profiles:
       - ui
     image: redis/redisinsight:latest
-    container_name: loan-hub-redis-ui
+    container_name: redis-ui
     ports:
       - "15540:5540"
     healthcheck:
