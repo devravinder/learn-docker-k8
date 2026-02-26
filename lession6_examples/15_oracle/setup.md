@@ -22,3 +22,17 @@ git clone https://github.com/oracle/docker-images.git
 ```
 
 ## Optional Step 4 - Publish the image
+
+create the a private repo in docker hub `oracle19c`
+
+```bash
+docker tag oracle/database:19.3.0-ee devravinder/oracle19c:19.3.0-ee
+```
+
+```bash
+docker login
+```
+
+```bash
+docker push devravinder/oracle19c:19.3.0-ee
+```
