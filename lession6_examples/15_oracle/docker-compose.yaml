@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  oracle-local:
+    image: slartus/oracle19
+    container_name: oracle-19c-local
+    environment:
+      ORACLE_SID: ${ORACLE_SID}
+      ORACLE_PDB: ${ORACLE_PDB}
+      ORACLE_PWD: ${ORACLE_PWD}
+      LOCAL_DB_USER: ${LOCAL_DB_USER}
+      LOCAL_DB_PWD: ${LOCAL_DB_PWD}
+    ports:
+      - "${LOCAL_DB_PORT}:1521"
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+      - ./init-scripts:/opt/oracle/scripts/startup
+
+volumes:
+  oracle-data:
