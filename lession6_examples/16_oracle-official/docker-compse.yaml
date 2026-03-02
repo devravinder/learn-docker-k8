@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  oracledb:
+    image: devravinder/oracle19c:19.3.0-ee
+    container_name: oracle19c
+    restart: unless-stopped
+    ports:
+      - "1524:1521"   # Oracle listener
+      - "5560:5500"   # Enterprise Manager Express (if provided)
+    environment:
+      # REQUIRED by the official image: set the SYS/SYSTEM password
+      ORACLE_PWD: "Itest@123"
+      ORACLE_PDB: "dcs_core_local"
+      # Optional: set character set if needed
+      ORACLE_CHARACTERSET: "AL32UTF8"
+
+      #
+      ORACLE_SID: ORACLE
+
+    volumes:
+      - oracledb-data:/opt/oracle/oradata
+      - ./init-scripts:/opt/oracle/scripts/setup:ro
+
+volumes:
+  oracledb-data:
+    driver: local
