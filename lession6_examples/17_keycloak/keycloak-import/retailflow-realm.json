@@ -1,0 +1,60 @@
+{
+  "realm": "retailflow",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      { "name": "CUSTOMER" },
+      { "name": "ADMIN" },
+      { "name": "MANAGER" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "retailflow-backend",
+      "enabled": true,
+      "publicClient": false,
+      "secret": "this-is-your-client-secret-change-me-9876543210",
+      "protocol": "openid-connect",
+      "redirectUris": [],
+      "webOrigins": [],
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": true,
+      "attributes": {
+        "access.token.lifespan": "3600"
+      }
+    },
+    {
+      "clientId": "retailflow-frontend",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "http://localhost:3000/*",
+        "http://localhost:4200/*"
+      ],
+      "webOrigins": ["http://localhost:3000", "http://localhost:4200"],
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false
+    }
+  ],
+  "users": [
+    {
+      "username": "testuser",
+      "enabled": true,
+      "email": "test.user@example.com",
+      "firstName": "Test",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "test1234",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["RETAIL_CUSTOMER"]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.5.6
+    container_name: keycloak-retailflow
+    restart: unless-stopped
+
+    ports:
+      - "8080:8080"     # http
+      # - "8443:8443"   # https – uncomment later when you add TLS
+
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: Itest@ke2
+      KC_HEALTH_ENABLED: true
+      KC_METRICS_ENABLED: true
+
+      # Optional – makes frontend URL nicer when running behind proxy / traefik
+      # KC_HOSTNAME: localhost
+      # KC_HOSTNAME_STRICT: false
+      # KC_HOSTNAME_STRICT_HTTPS: false
+      # KC_HTTP_ENABLED: true
+
+      # Logging (useful during learning)
+      KC_LOG_LEVEL: info
+
+    command:
+      - start-dev
+      - --import-realm               # ← this triggers import from /opt/keycloak/data/import
+
+    volumes:
+      # Mount your realm configuration(s) here
+      - ./keycloak-import:/opt/keycloak/data/import
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+# Optional – if you want persistent database right from the beginning
+#  postgres:
+#    image: postgres:16
+#    environment:
+#      POSTGRES_DB: keycloak
+#      POSTGRES_USER: keycloak
+#      POSTGRES_PASSWORD: keycloak123
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+
+#volumes:
+#  postgres_data:
